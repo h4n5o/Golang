@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	conferenceName := "Go Conference"
@@ -14,36 +17,46 @@ func main() {
 	fmt.Printf("We have a total of %v tickets and %v are still available.\n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your Tickets here to attend!")
 
-	var firstName string
-	var email string
-	var userTickets uint
-	var lastName string
-	// User nach Informationen fragen (User Input)
-	fmt.Println("Enter your first Name")
-	fmt.Scan(&firstName)
+	for {
 
-	fmt.Println("Enter your first Last Name")
-	fmt.Scan(&lastName)
+		var firstName string
+		var email string
+		var userTickets uint
+		var lastName string
+		// User nach Informationen fragen (User Input)
+		fmt.Println("Enter your first Name")
+		fmt.Scan(&firstName)
 
-	fmt.Println("Enter your E-Mail Adress")
-	fmt.Scan(&email)
+		fmt.Println("Enter your first Last Name")
+		fmt.Scan(&lastName)
 
-	fmt.Println("Enter number of Tickets")
-	fmt.Scan(&userTickets)
+		fmt.Println("Enter your E-Mail Adress")
+		fmt.Scan(&email)
 
-	remainingTickets = remainingTickets - userTickets
-	//Userinformationen speichern
-	bookings = append(bookings, firstName+" "+lastName)
+		fmt.Println("Enter number of Tickets")
+		fmt.Scan(&userTickets)
 
-	// Gibt Slice Informationen aus !!!!Slices und Arrays!!!!
-	fmt.Printf("The whole Slice: %v\n", bookings)
-	fmt.Printf("The first Value: %v\n", bookings[0])
-	fmt.Printf("The Type of Slice: %T\n", bookings)
-	fmt.Printf("Slice length: %v\n", len(bookings))
+		remainingTickets = remainingTickets - userTickets
+		//Userinformationen speichern
+		bookings = append(bookings, firstName+" "+lastName)
 
-	fmt.Printf("Thank you %v %v for booking %v Tickets. You will receive a confirmation Mail to %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v Tickets remaining for %v.\n", remainingTickets, conferenceName)
+		// Gibt Slice Informationen aus !!!!Slices und Arrays!!!!
+		fmt.Printf("The whole Slice: %v\n", bookings)
+		fmt.Printf("The first Value: %v\n", bookings[0])
+		fmt.Printf("The Type of Slice: %T\n", bookings)
+		fmt.Printf("Slice length: %v\n", len(bookings))
 
-	fmt.Printf("These are all our Bookings: %v\n", bookings)
+		fmt.Printf("Thank you %v %v for booking %v Tickets. You will receive a confirmation Mail to %v\n", firstName, lastName, userTickets, email)
+		fmt.Printf("%v Tickets remaining for %v.\n", remainingTickets, conferenceName)
 
+		firstNames := []string{}
+		for _, booking := range bookings { //Underscore ist für Unused Variables
+			var names = strings.Fields(booking)
+			firstNames = append(firstNames, names[0])
+		}
+
+		fmt.Printf("The first Names of Bookings are: %v\n", firstNames)
+		fmt.Printf("These are all our Bookings: %v\n", bookings)
+
+	}
 }
